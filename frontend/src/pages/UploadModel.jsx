@@ -2,16 +2,17 @@ import { useNavigate} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { useState   } from "react";
 export function UploadModel(){
-   const randomID = uuidv4(); 
+   const randomID = Math.floor(Math.random() * 1000000);
    const navigate = useNavigate();
    const [formData, setFormData] = useState({
      id: randomID,
-     modelName: "",
-     modelProvider: "",
-     modelCategory: "",
-     modelDescription: "",
-     likes: 0,
+     name: "",
+     category: "",
+     description: "",
+     provider: "",
      codeSnippet: "",
+     likes: 0,
+     
    });
     const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,23 +25,24 @@ export function UploadModel(){
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form validation
-    if (!formData.modelName || !formData.modelProvider || !formData.modelCategory || !formData.modelDescription || !formData.codeSnippet) {
+    if (!formData.name || !formData.provider || !formData.category || !formData.description || !formData.codeSnippet) {
       alert('Please fill in all fields.');
       return;
     }
     
     // Send a POST request to the server with the form data
-    fetch('http://localhost:3000/UploadModel', {
-      method: 'POST',
+    fetch(import.meta.env.VITE_API_URL + "UploadModel", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData)
-    })
-    .then( async(res) => {
-        const response = await res.json();
+      body: JSON.stringify(formData),
+    }).then(async (res) => {
+      const response = await res.json();
+      setTimeout(() => {
         navigate(`/Models/${formData.id}`);
-    })
+      }, 2000);
+    });
   };
 
   return (
@@ -54,8 +56,8 @@ export function UploadModel(){
             </label>
             <input
               type="text"
-              name="modelName"
-              value={formData.modelName}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
             />
@@ -66,8 +68,8 @@ export function UploadModel(){
             </label>
             <input
               type="text"
-              name="modelProvider"
-              value={formData.modelProvider}
+              name="provider"
+              value={formData.provider}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
             />
@@ -77,8 +79,8 @@ export function UploadModel(){
               Model Category:
             </label>
             <select
-              name="modelCategory"
-              value={formData.modelCategory}
+              name="category"
+              value={formData.category}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
             >
@@ -107,8 +109,8 @@ export function UploadModel(){
               Model Description:
             </label>
             <textarea
-              name="modelDescription"
-              value={formData.modelDescription}
+              name="description"
+              value={formData.description}
               onChange={handleChange}
               rows="4"
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"

@@ -7,13 +7,15 @@ import { Model } from "../components/model";
 export function ModelPage(){
     const [model , setModel] = useState([]);
     const modelId = useParams().modelId;
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     console.log(modelId);
     useEffect( () => {
-        fetch(`http://localhost:3000/Models/${modelId}`).then(async function(res){
+        fetch(import.meta.env.VITE_API_URL + `Models/${modelId}`).then(
+          async function (res) {
             const response = await res.json();
             setModel(response);
-        })
+          }
+        );
     }, [])
    
     function onClickHandler({name}){

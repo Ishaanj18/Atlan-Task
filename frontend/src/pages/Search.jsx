@@ -8,7 +8,7 @@ export function Search(){
     const [searchResults, setSearchResults] = useState([]);
    useEffect(() => {
   if (query) {
-    fetch(`http://localhost:3000/search/${query}`)
+    fetch(import.meta.env.VITE_API_URL + `search/${query}`)
       .then(async (res) => {
         if (res.ok) {
           const response = await res.json();
@@ -17,8 +17,8 @@ export function Search(){
           setSearchResults([]); // Reset search results
         }
       })
-      .catch(error => {
-        console.error('Error fetching search results:', error);
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
         setSearchResults([]); // Reset search results on error
       });
   }

@@ -14,7 +14,7 @@ export function Model(props) {
     const item = {
       id: Id,
     };
-    const response = await fetch("http://localhost:3000/explore/dislike", {
+    const response = await fetch( import.meta.env.VITE_API_URL + `explore/dislike/`,{
       method: "POST",
       mode: "cors",
       headers: {
@@ -40,14 +40,17 @@ export function Model(props) {
        id : Id
     }
     console.log(item);
-    const response = await fetch("http://localhost:3000/explore/like", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    });
+    const response = await fetch(
+      import.meta.env.VITE_API_URL + "explore/like",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    );
     const result = await response.json();
     if (result.success) {
       alert("liked");

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {Featured} from './pages/Featured'
 import {Explore} from './pages/Explore'
 import {Home} from './pages/Home'
 import { NavBar } from './components/NavBar'
@@ -22,7 +21,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/explore" element={<Explore />}></Route>
-          <Route path="/featured" element={<Featured />}></Route>
           <Route path="/topModel" element = {<TopModel/>}> </Route>
           <Route path="/Models/:modelId" element={<ModelPage />}> </Route>
           <Route path= "/Models/:modelId/Try" element={<TryOut />}> </Route>

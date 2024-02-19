@@ -5,7 +5,7 @@ export function TopModel() {
   const [topLikedModel, setTopLikedModel] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/topModel")
+    fetch(import.meta.env.VITE_API_URL + "topModel")
       .then(async (res) => {
         const response = await res.json();
         setTopLikedModel(response);

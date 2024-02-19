@@ -10,8 +10,10 @@ export function Explore() {
 
   useEffect(() => {
     Promise.all([
-      fetch("http://localhost:3000/explore").then((res) => res.json()),
-      fetch("http://localhost:3000/explore/tags").then((res) => {
+      fetch(import.meta.env.VITE_API_URL + "explore").then((res) =>
+        res.json()
+      ),
+      fetch(import.meta.env.VITE_API_URL + "explore/tags").then((res) => {
         return res.json();
       }),
     ]).then(([jsonData, tag]) => {
