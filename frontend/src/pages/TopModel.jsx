@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Model } from "../components/model";
+import { Model } from "../components/Model";
 
 export function TopModel() {
   const [topLikedModel, setTopLikedModel] = useState([]);

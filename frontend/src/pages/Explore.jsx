@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { FilterTag } from "../components/FilterTag";
-import { Model } from "../components/model";
+import { Model } from "../components/Model";
 
 export function Explore() {
   const [data, setData] = useState([]);

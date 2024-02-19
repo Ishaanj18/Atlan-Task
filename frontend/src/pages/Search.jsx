@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from "react";
-import { Model } from "../components/model";
+import { Model } from "../components/Model";
 
 export function Search(){
     const query = useParams().searchQuery;
