@@ -11,11 +11,17 @@ export function NavBar() {
     e.preventDefault();
     // Redirect to search page with the search query
     navigate(`/search/${searchQuery}`);
+    closeMobileMenu(); // Close mobile menu after search
   };
 
   const handleUploadModel = () => {
     // Navigate to the upload model page
     navigate("/UploadModel");
+    closeMobileMenu(); // Close mobile menu after upload model
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
 
   useEffect(() => {
@@ -38,14 +44,29 @@ export function NavBar() {
 
         <div className="hidden md:flex justify-center items-center space-x-4 flex-grow">
           <ul className="flex justify-between items-center space-x-4">
-            <li onClick={() => navigate("/")} className="cursor-pointer">
+            <li
+              onClick={() => {
+                navigate("/");
+                closeMobileMenu();
+              }}
+              className="cursor-pointer"
+            >
               Home
             </li>
-            <li onClick={() => navigate("/explore")} className="cursor-pointer">
+            <li
+              onClick={() => {
+                navigate("/explore");
+                closeMobileMenu();
+              }}
+              className="cursor-pointer"
+            >
               Explore
             </li>
             <li
-              onClick={() => navigate("/topModel")}
+              onClick={() => {
+                navigate("/topModel");
+                closeMobileMenu();
+              }}
               className="cursor-pointer"
             >
               Top Models
@@ -75,7 +96,7 @@ export function NavBar() {
           </li>
         </div>
 
-        <div className="md:hidden">
+        <div className="md:hidden fixed right-4 top-4">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-white focus:outline-none"
@@ -96,48 +117,63 @@ export function NavBar() {
           </button>
         </div>
 
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-gray-600 flex flex-col items-center">
-            <ul className="my-4 space-y-4">
-              <li onClick={() => navigate("/")} className="cursor-pointer">
-                Home
-              </li>
-              <li
-                onClick={() => navigate("/explore")}
-                className="cursor-pointer"
-              >
-                Explore
-              </li>
-              <li
-                onClick={() => navigate("/topModel")}
-                className="cursor-pointer"
-              >
-                Top Models
-              </li>
-            </ul>
-            <form onSubmit={handleSearch} className="flex items-center mb-4">
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-gray-700 text-white px-2 py-1 rounded-md focus:outline-none focus:bg-gray-800"
-              />
-              <button
-                type="submit"
-                className="ml-1 bg-gray-800 px-2 py-1 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-              >
-                Search
-              </button>
-            </form>
-            <button
-              onClick={handleUploadModel}
-              className="bg-transparent border border-gray-800 px-3 py-1 rounded-md text-white hover:bg-gray-800 hover:text-white focus:outline-none"
+        {/* Use Tailwind CSS to toggle visibility of mobile menu */}
+        <div
+          className={`md:hidden ${
+            isMobileMenuOpen ? "" : "hidden"
+          } absolute top-16 left-0 right-0 bg-gray-600 flex flex-col items-center`}
+        >
+          <ul className="my-4 space-y-4">
+            <li
+              onClick={() => {
+                navigate("/");
+                closeMobileMenu();
+              }}
+              className="cursor-pointer"
             >
-              Upload Model
+              Home
+            </li>
+            <li
+              onClick={() => {
+                navigate("/explore");
+                closeMobileMenu();
+              }}
+              className="cursor-pointer"
+            >
+              Explore
+            </li>
+            <li
+              onClick={() => {
+                navigate("/topModel");
+                closeMobileMenu();
+              }}
+              className="cursor-pointer"
+            >
+              Top Models
+            </li>
+          </ul>
+          <form onSubmit={handleSearch} className="flex items-center mb-4">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-gray-700 text-white px-2 py-1 rounded-md focus:outline-none focus:bg-gray-800"
+            />
+            <button
+              type="submit"
+              className="ml-1 bg-gray-800 px-2 py-1 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+            >
+              Search
             </button>
-          </div>
-        )}
+          </form>
+          <button
+            onClick={handleUploadModel}
+            className="bg-transparent border border-gray-800 px-3 py-1 rounded-md text-white hover:bg-gray-800 hover:text-white focus:outline-none"
+          >
+            Upload Model
+          </button>
+        </div>
       </nav>
     </header>
   );
