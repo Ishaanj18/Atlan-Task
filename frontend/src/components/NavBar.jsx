@@ -38,8 +38,8 @@ export function NavBar() {
   }, []);
 
   return (
-    <header>
-      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-12 h-16 bg-gray-600 text-white">
+    <header className="sticky top-0 z-50 bg-gray-600">
+      <nav className="flex justify-between items-center px-4 sm:px-8 md:px-12 h-16 text-white relative">
         <span className="text-xl font-bold cursor-pointer m-4">MODELS</span>
 
         <div className="hidden md:flex justify-center items-center space-x-4 flex-grow">
@@ -96,7 +96,7 @@ export function NavBar() {
           </li>
         </div>
 
-        <div className="md:hidden fixed right-4 top-4">
+        <div className="md:hidden absolute top-4 right-4">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-white focus:outline-none"
@@ -120,8 +120,8 @@ export function NavBar() {
         {/* Use Tailwind CSS to toggle visibility of mobile menu */}
         <div
           className={`md:hidden ${
-            isMobileMenuOpen ? "" : "hidden"
-          } absolute top-16 left-0 right-0 bg-gray-600 flex flex-col items-center`}
+            isMobileMenuOpen ? "block" : "hidden"
+          } absolute top-16 left-0 right-0 bg-zinc-600 flex flex-col items-center z-50`}
         >
           <ul className="my-4 space-y-4">
             <li
