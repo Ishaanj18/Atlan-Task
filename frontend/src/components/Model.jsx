@@ -62,6 +62,9 @@ export function Model(props) {
     }
   }
 
+    if (props.category === "Text Generation") {
+      return null; 
+    }
  
   return (
     <div
@@ -71,6 +74,7 @@ export function Model(props) {
         <span className="font-semibold">{props.category}</span>
       </div>
       <p>{props.description}</p>
+      
       <div>
         {isLiked ? (
           <button
